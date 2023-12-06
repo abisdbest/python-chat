@@ -1,0 +1,44 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Client</title>
+</head>
+<body>
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // Adjust the port number as needed
+        const socket = new WebSocket(window.location + ":5555");
+
+        socket.onopen = (event) => {
+            console.log("Connected to the server");
+        };
+
+        socket.onmessage = (event) => {
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<p>${event.data}</p>`;
+        };
+
+        socket.onclose = (event) => {
+            console.log("Connection closed");
+        };
+
+        function sendMessage() {
+            const messageInput = document.getElementById("message-input");
+            const message = messageInput.value;
+
+            // Send the message to the server
+            socket.send(message);
+
+            // Clear the input field
+            messageInput.value = "";
+        }
+    </script>
+</body>
+</html>
