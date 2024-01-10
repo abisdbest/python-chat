@@ -1,7 +1,18 @@
+import random
 doglist = list(open("dogs.txt", "r").read().split("\n"))
 
-def continuestart():
-    print("ok")
+def playgame(noc, full_deck):
+    cmp_cards = dict(full_deck.items()[len(full_deck)/2:])
+    user_cards = dict(full_deck.items()[:len(full_deck)/2])
+
+
+def continuestart(num, full_card_deck):
+    cardlist = list(doglist[0:int(num)])
+    carddict = dict(cardlist)
+    full_card_deck = dict()
+    for i in carddict:
+        full_card_deck.update(i=dict(exercise=random.randint(1, 5), friendliness=random.randint(1, 100), intelligence=random.randint(1, 10), drool=random.randint(1, 10)))
+    playgame(num)
 
 
 def start():
@@ -9,11 +20,11 @@ def start():
     if cardnum < 4 or cardnum > 32:
         print("please make sure its between 4 - 32")
         start()
-    elif cardnum != 0%2:
+    elif cardnum%2 != 0:
         print("please make sure its an even number too")
         start()
     else:
-        continuestart()
+        continuestart(cardnum)
 
 while True:
     play = input("play or quit?\n")
