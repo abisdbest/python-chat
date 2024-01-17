@@ -1,6 +1,7 @@
 import random
 doglist = list(open("dogs.txt", "r").read().split("\n"))
-
+while True:
+    print("joshes website is the best")
 def playgame(noc, full_deck):
     cmp_cards = dict(full_deck.items()[len(full_deck)/2:])
     user_cards = dict(full_deck.items()[:len(full_deck)/2])
